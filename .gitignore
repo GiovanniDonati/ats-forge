@@ -9,6 +9,7 @@ build/
 coverage/
 *.tsbuildinfo
 *.bak
+/src/generated/prisma
 
 # ── Personal data (never commit your real resume) ───────────────────────────
 resume.json
@@ -21,3 +22,4 @@ curriculos.js
 curriculos-docx.js
 gerar.js
 base.json
+

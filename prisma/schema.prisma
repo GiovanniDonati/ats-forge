@@ -1,8 +1,20 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+model User {
+  id           String   @id @default(uuid())
+  username     String   @unique
+  email        String   @unique
+  first_name   String
+  last_name    String
+  display_name String
+  avatar_url   String?  @default("https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y")
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
 }

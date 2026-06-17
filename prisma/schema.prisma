@@ -8,16 +8,17 @@ datasource db {
 }
 
 model User {
-  id          String    @id @default(uuid())
-  username    String    @unique
-  email       String    @unique
-  firstName   String    @map("first_name")
-  lastName    String    @map("last_name")
-  displayName String    @map("display_name")
-  avatarUrl   String?   @default("https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y") @map("avatar_url")
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @updatedAt @map("updated_at")
+  id          String       @id @default(uuid())
+  username    String       @unique
+  email       String       @unique
+  firstName   String       @map("first_name")
+  lastName    String       @map("last_name")
+  displayName String       @map("display_name")
+  avatarUrl   String?      @default("https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y") @map("avatar_url")
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
   accounts    Account[]
+  credentials credential[]
 }
 
 model Account {
@@ -34,4 +35,14 @@ model Account {
   createdAt         DateTime  @default(now()) @map("created_at")
 
   @@index([provider, providerAccountId], map: "provider_providerAccountId_idx")
+}
+
+model credential {
+  id           String   @id @default(uuid())
+  userId       String   @map("user_id")
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
 }

@@ -8,13 +8,30 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(uuid())
-  username     String   @unique
-  email        String   @unique
-  first_name   String
-  last_name    String
-  display_name String
-  avatar_url   String?  @default("https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y")
-  created_at   DateTime @default(now())
-  updated_at   DateTime @updatedAt
+  id          String    @id @default(uuid())
+  username    String    @unique
+  email       String    @unique
+  firstName   String    @map("first_name")
+  lastName    String    @map("last_name")
+  displayName String    @map("display_name")
+  avatarUrl   String?   @default("https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y") @map("avatar_url")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  accounts    Account[]
+}
+
+model Account {
+  id                String    @id @default(uuid())
+  userId            String    @map("user_id")
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  provider          String
+  providerAccountId String    @map("provider_account_id")
+  accessToken       String?   @map("access_token")
+  refreshToken      String?   @map("refresh_token")
+  tokenType         String?   @map("token_type")
+  scope             String?   @map("scope")
+  expiresAt         DateTime? @map("expires_at")
+  createdAt         DateTime  @default(now()) @map("created_at")
+
+  @@index([provider, providerAccountId], map: "provider_providerAccountId_idx")
 }

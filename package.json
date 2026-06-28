@@ -5,8 +5,8 @@
   "main": "dist/main.js",
   "scripts": {
     "build": "tsc",
-    "generate": "ts-node src/main.ts",
-    "generate:compiled": "node dist/main.js",
+    "start": "node dist/http-server.js",
+    "dev": "ts-node src/http-server.ts",
     "setup": "cp resume.example.json resume.json",
     "clean": "rimraf dist"
   },
@@ -22,11 +22,17 @@
   "license": "MIT",
   "type": "commonjs",
   "dependencies": {
-    "docx": "^9.6.1"
+    "bcrypt": "^6.0.0",
+    "docx": "^9.6.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3"
   },
   "devDependencies": {
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
+    "@types/bcrypt": "^6.0.0",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.19.39",
     "prisma": "^7.8.0",
     "rimraf": "^5.0.10",

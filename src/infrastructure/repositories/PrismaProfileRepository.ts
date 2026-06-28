@@ -1,8 +1,8 @@
-import { prisma } from '../../../config/prisma';
 import { PrismaClient } from '../../generated/prisma';
 import { ProfileEntity } from '../../domain/entities/profile/Profile';
 import { LanguageLevel, EducationType } from '../../domain/entities/profile/ProfileTypes';
 import { IProfileRepository } from '../../domain/interfaces/IProfileRepository';
+import { prisma } from '../../../config/prisma';
 
 export class PrismaProfileRepository implements IProfileRepository {
   private prisma: PrismaClient;
@@ -113,6 +113,23 @@ export class PrismaProfileRepository implements IProfileRepository {
     });
 
     return this.mapToEntity(created);
+  }
+
+  async findAll(): Promise<ProfileEntity[]> {
+    const profiles = await this.prisma.profile.findMany({
+      include: {
+        languages: true,
+        skills: true,
+        experiences: true,
+        educations: true,
+        projects: {
+          include: {
+            skills: true,
+          },
+        },
+      },
+    });
+    return profiles.map((p) => this.mapToEntity(p));
   }
 
   async findById(id: string): Promise<ProfileEntity | null> {

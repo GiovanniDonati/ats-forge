@@ -7,11 +7,11 @@ import { AddProfileProjectsUseCase } from '../../../application/use-cases/profil
 import { AddProfileEducationsUseCase } from '../../../application/use-cases/profile/AddProfileEducationsUseCase';
 import { AddProfileLanguagesUseCase } from '../../../application/use-cases/profile/AddProfileLanguagesUseCase';
 
-import { UpdateSpecificSkillUseCase } from '../../../application/use-cases/profile/UpdateSkillUseCase';
-import { UpdateSpecificExperienceUseCase } from '../../../application/use-cases/profile/UpdateExperienceUseCase';
-import { UpdateSpecificProjectUseCase } from '../../../application/use-cases/profile/UpdateProjectUseCase';
-import { UpdateSpecificEducationUseCase } from '../../../application/use-cases/profile/UpdateEducationUseCase';
-import { UpdateSpecificLanguageUseCase } from '../../../application/use-cases/profile/UpdateLanguageUseCase';
+import { UpdateSkillUseCase } from '../../../application/use-cases/profile/UpdateSkillUseCase';
+import { UpdateExperienceUseCase } from '../../../application/use-cases/profile/UpdateExperienceUseCase';
+import { UpdateProjectUseCase } from '../../../application/use-cases/profile/UpdateProjectUseCase';
+import { UpdateEducationUseCase } from '../../../application/use-cases/profile/UpdateEducationUseCase';
+import { UpdateLanguageUseCase } from '../../../application/use-cases/profile/UpdateLanguageUseCase';
 import { PrismaProfileRepository } from '../../../infrastructure/repositories/PrismaProfileRepository';
 import { GetProfilesByUserIdUseCase } from '../../../application/use-cases/profile/GetProfilesByUserIdUseCase';
 
@@ -24,11 +24,11 @@ const addProfileExperiencesUseCase = new AddProfileExperiencesUseCase(profileRep
 const addProfileProjectsUseCase = new AddProfileProjectsUseCase(profileRepository);
 const addProfileEducationsUseCase = new AddProfileEducationsUseCase(profileRepository);
 const addProfileLanguagesUseCase = new AddProfileLanguagesUseCase(profileRepository);
-const updateSpecificSkillUseCase = new UpdateSpecificSkillUseCase(profileRepository);
-const updateSpecificExperienceUseCase = new UpdateSpecificExperienceUseCase(profileRepository);
-const updateSpecificProjectUseCase = new UpdateSpecificProjectUseCase(profileRepository);
-const updateSpecificEducationUseCase = new UpdateSpecificEducationUseCase(profileRepository);
-const updateSpecificLanguageUseCase = new UpdateSpecificLanguageUseCase(profileRepository);
+const updateSkillUseCase = new UpdateSkillUseCase(profileRepository);
+const updateExperienceUseCase = new UpdateExperienceUseCase(profileRepository);
+const updateProjectUseCase = new UpdateProjectUseCase(profileRepository);
+const updateEducationUseCase = new UpdateEducationUseCase(profileRepository);
+const updateLanguageUseCase = new UpdateLanguageUseCase(profileRepository);
 
 export const ProfileController = {
   async create(req: Request, res: Response) {
@@ -64,7 +64,7 @@ export const ProfileController = {
   async updateSkill(req: Request, res: Response) {
     try {
       const { id, skillId } = req.params;
-      const profile = await updateSpecificSkillUseCase.execute(id as string, skillId as string, req.body);
+      const profile = await updateSkillUseCase.execute(id as string, skillId as string, req.body);
       res.status(200).json(profile);
     } catch (error) {
       res.status(500).json({ error: (error as Error).message });
@@ -95,7 +95,7 @@ export const ProfileController = {
   async updateExperience(req: Request, res: Response) {
     try {
       const { id, expId } = req.params;
-      const profile = await updateSpecificExperienceUseCase.execute(id as string, expId as string, req.body);
+      const profile = await updateExperienceUseCase.execute(id as string, expId as string, req.body);
       res.status(200).json(profile);
     } catch (error) {
       res.status(500).json({ error: (error as Error).message });
@@ -126,7 +126,7 @@ export const ProfileController = {
   async updateProject(req: Request, res: Response) {
     try {
       const { id, projId } = req.params;
-      const profile = await updateSpecificProjectUseCase.execute(id as string, projId as string, req.body);
+      const profile = await updateProjectUseCase.execute(id as string, projId as string, req.body);
       res.status(200).json(profile);
     } catch (error) {
       res.status(500).json({ error: (error as Error).message });
@@ -157,7 +157,7 @@ export const ProfileController = {
   async updateEducation(req: Request, res: Response) {
     try {
       const { id, eduId } = req.params;
-      const profile = await updateSpecificEducationUseCase.execute(id as string, eduId as string, req.body);
+      const profile = await updateEducationUseCase.execute(id as string, eduId as string, req.body);
       res.status(200).json(profile);
     } catch (error) {
       res.status(500).json({ error: (error as Error).message });
@@ -188,7 +188,7 @@ export const ProfileController = {
   async updateLanguage(req: Request, res: Response) {
     try {
       const { id, langId } = req.params;
-      const profile = await updateSpecificLanguageUseCase.execute(id as string, langId as string, req.body);
+      const profile = await updateLanguageUseCase.execute(id as string, langId as string, req.body);
       res.status(200).json(profile);
     } catch (error) {
       res.status(500).json({ error: (error as Error).message });

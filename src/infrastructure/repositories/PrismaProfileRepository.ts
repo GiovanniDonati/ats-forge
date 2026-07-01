@@ -286,6 +286,209 @@ export class PrismaProfileRepository implements IProfileRepository {
     return this.mapToEntity(updated);
   }
 
+  async addSkills(id: string, skills: any[]): Promise<ProfileEntity> {
+    const updated = await this.prisma.profile.update({
+      where: { id },
+      data: {
+        skills: {
+          connectOrCreate: skills.map((skill) => ({
+            where: { name: skill.name },
+            create: { name: skill.name },
+          })),
+        },
+      },
+      include: { languages: true, skills: true, experiences: true, educations: true, projects: { include: { skills: true } } },
+    });
+
+    return this.mapToEntity(updated);
+  }
+
+  async addExperiences(id: string, experiences: any[]): Promise<ProfileEntity> {
+    const updated = await this.prisma.profile.update({
+      where: { id },
+      data: {
+        experiences: {
+          create: experiences.map((exp) => ({
+            title: exp.title,
+            company: exp.company,
+            location: exp.location,
+            activities: exp.activities,
+            results: exp.results,
+            startDate: new Date(exp.startDate),
+            endDate: exp.endDate ? new Date(exp.endDate) : null,
+            isCurrent: exp.isCurrent,
+          })),
+        },
+      },
+      include: { languages: true, skills: true, experiences: true, educations: true, projects: { include: { skills: true } } },
+    });
+    return this.mapToEntity(updated);
+  }
+
+  async addProjects(id: string, projects: any[]): Promise<ProfileEntity> {
+    const updated = await this.prisma.profile.update({
+      where: { id },
+      data: {
+        projects: {
+          create: projects.map((proj) => ({
+            name: proj.name,
+            description: proj.description,
+            repository: proj.repository,
+            deploy: proj.deploy,
+            startDate: new Date(proj.startDate),
+            endDate: proj.endDate ? new Date(proj.endDate) : null,
+            skills: proj.skills ? { connectOrCreate: proj.skills.map((s:any) => ({ where: { name: s.name }, create: { name: s.name } })) } : undefined,
+          })),
+        },
+      },
+      include: { languages: true, skills: true, experiences: true, educations: true, projects: { include: { skills: true } } },
+    });
+    return this.mapToEntity(updated);
+  }
+
+  async addEducations(id: string, educations: any[]): Promise<ProfileEntity> {
+    const updated = await this.prisma.profile.update({
+      where: { id },
+      data: {
+        educations: {
+          create: educations.map((edu) => ({
+            school: edu.school,
+            fieldOfStudy: edu.fieldOfStudy,
+            degreeType: edu.degreeType,
+            startDate: new Date(edu.startDate),
+            endDate: edu.endDate ? new Date(edu.endDate) : null,
+            isCurrent: edu.isCurrent,
+          })),
+        },
+      },
+      include: { languages: true, skills: true, experiences: true, educations: true, projects: { include: { skills: true } } },
+    });
+    return this.mapToEntity(updated);
+  }
+
+  async addLanguages(id: string, languages: any[]): Promise<ProfileEntity> {
+    const updated = await this.prisma.profile.update({
+      where: { id },
+      data: {
+        languages: {
+          create: languages.map((lang) => ({
+            name: lang.name,
+            level: lang.level,
+          })),
+        },
+      },
+      include: { languages: true, skills: true, experiences: true, educations: true, projects: { include: { skills: true } } },
+    });
+    return this.mapToEntity(updated);
+  }
+
+  async updateSkill(profileId: string, skillId: string, data: any): Promise<ProfileEntity> {
+    const updated = await this.prisma.profile.update({
+      where: { id: profileId },
+      data: {
+        skills: {
+          update: {
+            where: { id: skillId },
+            data: { name: data.name },
+          },
+        },
+      },
+      include: { languages: true, skills: true, experiences: true, educations: true, projects: { include: { skills: true } } },
+    });
+    return this.mapToEntity(updated);
+  }
+
+  async updateExperience(profileId: string, expId: string, data: any): Promise<ProfileEntity> {
+    const updated = await this.prisma.profile.update({
+      where: { id: profileId },
+      data: {
+        experiences: {
+          update: {
+            where: { id: expId },
+            data: {
+              title: data.title,
+              company: data.company,
+              location: data.location,
+              activities: data.activities,
+              results: data.results,
+              startDate: data.startDate ? new Date(data.startDate) : undefined,
+              endDate: data.endDate !== undefined ? (data.endDate ? new Date(data.endDate) : null) : undefined,
+              isCurrent: data.isCurrent,
+            },
+          },
+        },
+      },
+      include: { languages: true, skills: true, experiences: true, educations: true, projects: { include: { skills: true } } },
+    });
+    return this.mapToEntity(updated);
+  }
+
+  async updateProject(profileId: string, projId: string, data: any): Promise<ProfileEntity> {
+    const updated = await this.prisma.profile.update({
+      where: { id: profileId },
+      data: {
+        projects: {
+          update: {
+            where: { id: projId },
+            data: {
+              name: data.name,
+              description: data.description,
+              repository: data.repository,
+              deploy: data.deploy,
+              startDate: data.startDate ? new Date(data.startDate) : undefined,
+              endDate: data.endDate !== undefined ? (data.endDate ? new Date(data.endDate) : null) : undefined,
+              skills: data.skills ? { set: [], connectOrCreate: data.skills.map((s:any) => ({ where: { name: s.name }, create: { name: s.name } })) } : undefined,
+            },
+          },
+        },
+      },
+      include: { languages: true, skills: true, experiences: true, educations: true, projects: { include: { skills: true } } },
+    });
+    return this.mapToEntity(updated);
+  }
+
+  async updateEducation(profileId: string, eduId: string, data: any): Promise<ProfileEntity> {
+    const updated = await this.prisma.profile.update({
+      where: { id: profileId },
+      data: {
+        educations: {
+          update: {
+            where: { id: eduId },
+            data: {
+              school: data.school,
+              fieldOfStudy: data.fieldOfStudy,
+              degreeType: data.degreeType,
+              startDate: data.startDate ? new Date(data.startDate) : undefined,
+              endDate: data.endDate !== undefined ? (data.endDate ? new Date(data.endDate) : null) : undefined,
+              isCurrent: data.isCurrent,
+            },
+          },
+        },
+      },
+      include: { languages: true, skills: true, experiences: true, educations: true, projects: { include: { skills: true } } },
+    });
+    return this.mapToEntity(updated);
+  }
+
+  async updateLanguage(profileId: string, langId: string, data: any): Promise<ProfileEntity> {
+    const updated = await this.prisma.profile.update({
+      where: { id: profileId },
+      data: {
+        languages: {
+          update: {
+            where: { id: langId },
+            data: {
+              name: data.name,
+              level: data.level,
+            },
+          },
+        },
+      },
+      include: { languages: true, skills: true, experiences: true, educations: true, projects: { include: { skills: true } } },
+    });
+    return this.mapToEntity(updated);
+  }
+
   async delete(id: string): Promise<void> {
     await this.prisma.profile.delete({
       where: { id },

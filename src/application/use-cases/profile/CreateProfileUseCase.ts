@@ -5,7 +5,7 @@ export class CreateProfileUseCase {
   constructor(private readonly profileRepository: IProfileRepository) {}
 
   async execute(profile: ProfileEntity): Promise<ProfileEntity> {
-    // Aqui poderiam entrar regras de negócio, validações, etc.
+    console.log('Profile object:', JSON.stringify(profile, null, 2));
     return await this.profileRepository.create(profile);
   }
 }

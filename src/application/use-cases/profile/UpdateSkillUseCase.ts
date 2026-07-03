@@ -1,10 +1,10 @@
-import { IProfileRepository } from '../../../domain/interfaces/IProfileRepository';
+import { ISkillRepository } from '../../../domain/interfaces/ISkillRepository';
 import { ProfileEntity } from '../../../domain/entities/profile/Profile';
 
 export class UpdateSkillUseCase {
-  constructor(private readonly profileRepository: IProfileRepository) {}
+  constructor(private readonly skillRepository: ISkillRepository) {}
 
   async execute(profileId: string, skillId: string, data: any): Promise<ProfileEntity> {
-    return await this.profileRepository.updateSkill(profileId, skillId, data);
+    return await this.skillRepository.update(profileId, skillId, data);
   }
 }

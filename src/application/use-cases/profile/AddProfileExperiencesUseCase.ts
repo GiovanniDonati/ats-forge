@@ -1,10 +1,10 @@
-import { IProfileRepository } from '../../../domain/interfaces/IProfileRepository';
+import { IExperienceRepository } from '../../../domain/interfaces/IExperienceRepository';
 import { ProfileEntity } from '../../../domain/entities/profile/Profile';
 
 export class AddProfileExperiencesUseCase {
-  constructor(private readonly profileRepository: IProfileRepository) {}
+  constructor(private readonly experienceRepository: IExperienceRepository) {}
 
   async execute(id: string, experiences: any[]): Promise<ProfileEntity> {
-    return await this.profileRepository.addExperiences(id, experiences);
+    return await this.experienceRepository.add(id, experiences);
   }
 }

@@ -1,10 +1,10 @@
-import { IProfileRepository } from '../../../domain/interfaces/IProfileRepository';
+import { ILanguageRepository } from '../../../domain/interfaces/ILanguageRepository';
 import { ProfileEntity } from '../../../domain/entities/profile/Profile';
 
 export class AddProfileLanguagesUseCase {
-  constructor(private readonly profileRepository: IProfileRepository) {}
+  constructor(private readonly languageRepository: ILanguageRepository) {}
 
   async execute(id: string, languages: any[]): Promise<ProfileEntity> {
-    return await this.profileRepository.addLanguages(id, languages);
+    return await this.languageRepository.add(id, languages);
   }
 }

@@ -1,10 +1,10 @@
-import { IProfileRepository } from '../../../domain/interfaces/IProfileRepository';
+import { IEducationRepository } from '../../../domain/interfaces/IEducationRepository';
 import { ProfileEntity } from '../../../domain/entities/profile/Profile';
 
 export class AddProfileEducationsUseCase {
-  constructor(private readonly profileRepository: IProfileRepository) {}
+  constructor(private readonly educationRepository: IEducationRepository) {}
 
   async execute(id: string, educations: any[]): Promise<ProfileEntity> {
-    return await this.profileRepository.addEducations(id, educations);
+    return await this.educationRepository.add(id, educations);
   }
 }

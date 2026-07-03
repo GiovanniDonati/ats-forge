@@ -3,13 +3,18 @@ import { GetProfileUseCase } from '../../../application/use-cases/profile/GetPro
 import { AddProfileExperiencesUseCase } from '../../../application/use-cases/profile/AddProfileExperiencesUseCase';
 import { UpdateExperienceUseCase } from '../../../application/use-cases/profile/UpdateExperienceUseCase';
 import { PrismaProfileRepository } from '../../../infrastructure/repositories/PrismaProfileRepository';
+import { PrismaExperienceRepository } from '../../../infrastructure/repositories/PrismaExperienceRepository';
 
 const profileRepository = new PrismaProfileRepository();
+const experienceRepository = new PrismaExperienceRepository();
+
 const getProfileUseCase = new GetProfileUseCase(profileRepository);
-const addProfileExperiencesUseCase = new AddProfileExperiencesUseCase(profileRepository);
-const updateExperienceUseCase = new UpdateExperienceUseCase(profileRepository);
+const addProfileExperiencesUseCase = new AddProfileExperiencesUseCase(experienceRepository);
+const updateExperienceUseCase = new UpdateExperienceUseCase(experienceRepository);
 
 export const ExperienceController = {
+...
+
   async addExperience(req: Request, res: Response) {
     try {
       const { id } = req.params;

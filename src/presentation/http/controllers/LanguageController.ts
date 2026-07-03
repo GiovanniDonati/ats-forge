@@ -3,13 +3,18 @@ import { GetProfileUseCase } from '../../../application/use-cases/profile/GetPro
 import { AddProfileLanguagesUseCase } from '../../../application/use-cases/profile/AddProfileLanguagesUseCase';
 import { UpdateLanguageUseCase } from '../../../application/use-cases/profile/UpdateLanguageUseCase';
 import { PrismaProfileRepository } from '../../../infrastructure/repositories/PrismaProfileRepository';
+import { PrismaLanguageRepository } from '../../../infrastructure/repositories/PrismaLanguageRepository';
 
 const profileRepository = new PrismaProfileRepository();
+const languageRepository = new PrismaLanguageRepository();
+
 const getProfileUseCase = new GetProfileUseCase(profileRepository);
-const addProfileLanguagesUseCase = new AddProfileLanguagesUseCase(profileRepository);
-const updateLanguageUseCase = new UpdateLanguageUseCase(profileRepository);
+const addProfileLanguagesUseCase = new AddProfileLanguagesUseCase(languageRepository);
+const updateLanguageUseCase = new UpdateLanguageUseCase(languageRepository);
 
 export const LanguageController = {
+...
+
   async addLanguage(req: Request, res: Response) {
     try {
       const { id } = req.params;

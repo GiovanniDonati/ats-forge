@@ -3,13 +3,18 @@ import { GetProfileUseCase } from '../../../application/use-cases/profile/GetPro
 import { AddProfileProjectsUseCase } from '../../../application/use-cases/profile/AddProfileProjectsUseCase';
 import { UpdateProjectUseCase } from '../../../application/use-cases/profile/UpdateProjectUseCase';
 import { PrismaProfileRepository } from '../../../infrastructure/repositories/PrismaProfileRepository';
+import { PrismaProjectRepository } from '../../../infrastructure/repositories/PrismaProjectRepository';
 
 const profileRepository = new PrismaProfileRepository();
+const projectRepository = new PrismaProjectRepository();
+
 const getProfileUseCase = new GetProfileUseCase(profileRepository);
-const addProfileProjectsUseCase = new AddProfileProjectsUseCase(profileRepository);
-const updateProjectUseCase = new UpdateProjectUseCase(profileRepository);
+const addProfileProjectsUseCase = new AddProfileProjectsUseCase(projectRepository);
+const updateProjectUseCase = new UpdateProjectUseCase(projectRepository);
 
 export const ProjectController = {
+...
+
   async addProject(req: Request, res: Response) {
     try {
       const { id } = req.params;

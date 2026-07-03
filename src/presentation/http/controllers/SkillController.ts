@@ -3,13 +3,18 @@ import { GetProfileUseCase } from '../../../application/use-cases/profile/GetPro
 import { AddProfileSkillsUseCase } from '../../../application/use-cases/profile/AddProfileSkillsUseCase';
 import { UpdateSkillUseCase } from '../../../application/use-cases/profile/UpdateSkillUseCase';
 import { PrismaProfileRepository } from '../../../infrastructure/repositories/PrismaProfileRepository';
+import { PrismaSkillRepository } from '../../../infrastructure/repositories/PrismaSkillRepository';
 
 const profileRepository = new PrismaProfileRepository();
+const skillRepository = new PrismaSkillRepository();
+
 const getProfileUseCase = new GetProfileUseCase(profileRepository);
-const addProfileSkillsUseCase = new AddProfileSkillsUseCase(profileRepository);
-const updateSkillUseCase = new UpdateSkillUseCase(profileRepository);
+const addProfileSkillsUseCase = new AddProfileSkillsUseCase(skillRepository);
+const updateSkillUseCase = new UpdateSkillUseCase(skillRepository);
 
 export const SkillController = {
+...
+
   async addSkill(req: Request, res: Response) {
     try {
       const { id } = req.params;

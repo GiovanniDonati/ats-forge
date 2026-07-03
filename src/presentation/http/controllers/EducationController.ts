@@ -3,13 +3,18 @@ import { GetProfileUseCase } from '../../../application/use-cases/profile/GetPro
 import { AddProfileEducationsUseCase } from '../../../application/use-cases/profile/AddProfileEducationsUseCase';
 import { UpdateEducationUseCase } from '../../../application/use-cases/profile/UpdateEducationUseCase';
 import { PrismaProfileRepository } from '../../../infrastructure/repositories/PrismaProfileRepository';
+import { PrismaEducationRepository } from '../../../infrastructure/repositories/PrismaEducationRepository';
 
 const profileRepository = new PrismaProfileRepository();
+const educationRepository = new PrismaEducationRepository();
+
 const getProfileUseCase = new GetProfileUseCase(profileRepository);
-const addProfileEducationsUseCase = new AddProfileEducationsUseCase(profileRepository);
-const updateEducationUseCase = new UpdateEducationUseCase(profileRepository);
+const addProfileEducationsUseCase = new AddProfileEducationsUseCase(educationRepository);
+const updateEducationUseCase = new UpdateEducationUseCase(educationRepository);
 
 export const EducationController = {
+...
+
   async addEducation(req: Request, res: Response) {
     try {
       const { id } = req.params;

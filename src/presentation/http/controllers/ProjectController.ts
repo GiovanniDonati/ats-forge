@@ -13,7 +13,6 @@ const addProfileProjectsUseCase = new AddProfileProjectsUseCase(projectRepositor
 const updateProjectUseCase = new UpdateProjectUseCase(projectRepository);
 
 export const ProjectController = {
-...
 
   async addProject(req: Request, res: Response) {
     try {

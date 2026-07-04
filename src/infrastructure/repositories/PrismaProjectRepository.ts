@@ -22,7 +22,7 @@ export class PrismaProjectRepository implements IProjectRepository {
             description: proj.description,
             repository: proj.repository,
             deploy: proj.deploy,
-            startDate: new Date(proj.startDate),
+            startDate: proj.startDate ? new Date(proj.startDate) : null,
             endDate: proj.endDate ? new Date(proj.endDate) : null,
             skills: proj.skills ? { connectOrCreate: proj.skills.map((s:any) => ({ where: { name: s.name }, create: { name: s.name } })) } : undefined,
           })),

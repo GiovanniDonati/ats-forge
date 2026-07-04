@@ -13,7 +13,6 @@ const addProfileSkillsUseCase = new AddProfileSkillsUseCase(skillRepository);
 const updateSkillUseCase = new UpdateSkillUseCase(skillRepository);
 
 export const SkillController = {
-...
 
   async addSkill(req: Request, res: Response) {
     try {

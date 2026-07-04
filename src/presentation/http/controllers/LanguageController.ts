@@ -13,7 +13,6 @@ const addProfileLanguagesUseCase = new AddProfileLanguagesUseCase(languageReposi
 const updateLanguageUseCase = new UpdateLanguageUseCase(languageRepository);
 
 export const LanguageController = {
-...
 
   async addLanguage(req: Request, res: Response) {
     try {

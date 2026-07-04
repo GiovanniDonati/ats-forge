@@ -13,7 +13,6 @@ const addProfileEducationsUseCase = new AddProfileEducationsUseCase(educationRep
 const updateEducationUseCase = new UpdateEducationUseCase(educationRepository);
 
 export const EducationController = {
-...
 
   async addEducation(req: Request, res: Response) {
     try {

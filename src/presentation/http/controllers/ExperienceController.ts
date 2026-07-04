@@ -13,7 +13,6 @@ const addProfileExperiencesUseCase = new AddProfileExperiencesUseCase(experience
 const updateExperienceUseCase = new UpdateExperienceUseCase(experienceRepository);
 
 export const ExperienceController = {
-...
 
   async addExperience(req: Request, res: Response) {
     try {

@@ -2,8 +2,10 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { PrismaUserRepository } from '../../../infrastructure/repositories/PrismaUserRepository';
 import { UserEntity } from '../../../domain/entities/User';
+import { GetAllUsersUseCase } from '../../../application/use-cases/user/GetAllUsersUseCase';
 
 const userRepository = new PrismaUserRepository();
+const getAllUsersUseCase = new GetAllUsersUseCase(userRepository);
 const SALT_ROUNDS = 10;
 
 export const UserController = {
@@ -35,6 +37,15 @@ export const UserController = {
         return res.status(404).json({ message: 'User not found' });
       }
       res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json({ error: (error as Error).message });
+    }
+  },
+
+  async getAll(req: Request, res: Response) {
+    try {
+      const users = await getAllUsersUseCase.execute();
+      res.status(200).json(users);
     } catch (error) {
       res.status(500).json({ error: (error as Error).message });
     }

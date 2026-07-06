@@ -5,6 +5,7 @@ import { validateUserRegistration } from '../middlewares/validateUserRegistratio
 const router = Router();
 
 router.post('/register', validateUserRegistration, UserController.register);
+router.get('/', UserController.getAll);
 router.get('/:id', UserController.getById);
 
 export default router;

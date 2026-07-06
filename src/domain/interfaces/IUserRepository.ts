@@ -8,4 +8,5 @@ export interface IUserRepository {
   update(id: string, data: Partial<UserEntity>): Promise<UserEntity>;
   delete(id: string): Promise<void>;
   getPasswordHashByUserId(userId: string): Promise<string | null>;
+  findAll(): Promise<UserEntity[]>;
 }

@@ -97,6 +97,11 @@ export class PrismaUserRepository implements IUserRepository {
     return credential ? credential.passwordHash : null;
   }
 
+  async findAll(): Promise<UserEntity[]> {
+    const users = await this.prisma.user.findMany();
+    return users.map(this.mapToEntity);
+  }
+
   private mapToEntity(user: any): UserEntity {
     return {
       id: user.id,

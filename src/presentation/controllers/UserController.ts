@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-import { PrismaUserRepository } from '../../../infrastructure/repositories/PrismaUserRepository';
-import { UserEntity } from '../../../domain/entities/User';
-import { GetAllUsersUseCase } from '../../../application/use-cases/user/GetAllUsersUseCase';
+import { PrismaUserRepository } from '../../infrastructure/repositories/PrismaUserRepository';
+import { UserEntity } from '../../domain/entities/User';
+import { GetAllUsersUseCase } from '../../application/use-cases/user/GetAllUsersUseCase';
 
 const userRepository = new PrismaUserRepository();
 const getAllUsersUseCase = new GetAllUsersUseCase(userRepository);

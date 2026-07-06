@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { CreateProfileUseCase } from '../../../application/use-cases/profile/CreateProfileUseCase';
-import { GetProfileUseCase } from '../../../application/use-cases/profile/GetProfileUseCase';
-import { GetProfilesByUserIdUseCase } from '../../../application/use-cases/profile/GetProfilesByUserIdUseCase';
-import { PrismaProfileRepository } from '../../../infrastructure/repositories/PrismaProfileRepository';
+import { CreateProfileUseCase } from '../../application/use-cases/profile/CreateProfileUseCase';
+import { GetProfileUseCase } from '../../application/use-cases/profile/GetProfileUseCase';
+import { GetProfilesByUserIdUseCase } from '../../application/use-cases/profile/GetProfilesByUserIdUseCase';
+import { PrismaProfileRepository } from '../../infrastructure/repositories/PrismaProfileRepository';
 
 const profileRepository = new PrismaProfileRepository();
 const createProfileUseCase = new CreateProfileUseCase(profileRepository);

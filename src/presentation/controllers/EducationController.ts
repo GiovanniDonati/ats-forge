@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { GetProfileUseCase } from '../../../application/use-cases/profile/GetProfileUseCase';
-import { AddProfileEducationsUseCase } from '../../../application/use-cases/profile/AddProfileEducationsUseCase';
-import { UpdateEducationUseCase } from '../../../application/use-cases/profile/UpdateEducationUseCase';
-import { PrismaProfileRepository } from '../../../infrastructure/repositories/PrismaProfileRepository';
-import { PrismaEducationRepository } from '../../../infrastructure/repositories/PrismaEducationRepository';
+import { GetProfileUseCase } from '../../application/use-cases/profile/GetProfileUseCase';
+import { AddProfileEducationsUseCase } from '../../application/use-cases/profile/AddProfileEducationsUseCase';
+import { UpdateEducationUseCase } from '../../application/use-cases/profile/UpdateEducationUseCase';
+import { PrismaProfileRepository } from '../../infrastructure/repositories/PrismaProfileRepository';
+import { PrismaEducationRepository } from '../../infrastructure/repositories/PrismaEducationRepository';
 
 const profileRepository = new PrismaProfileRepository();
 const educationRepository = new PrismaEducationRepository();

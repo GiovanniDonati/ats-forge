@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { GetProfileUseCase } from '../../../application/use-cases/profile/GetProfileUseCase';
-import { AddProfileSkillsUseCase } from '../../../application/use-cases/profile/AddProfileSkillsUseCase';
-import { UpdateSkillUseCase } from '../../../application/use-cases/profile/UpdateSkillUseCase';
-import { PrismaProfileRepository } from '../../../infrastructure/repositories/PrismaProfileRepository';
-import { PrismaSkillRepository } from '../../../infrastructure/repositories/PrismaSkillRepository';
+import { GetProfileUseCase } from '../../application/use-cases/profile/GetProfileUseCase';
+import { AddProfileSkillsUseCase } from '../../application/use-cases/profile/AddProfileSkillsUseCase';
+import { UpdateSkillUseCase } from '../../application/use-cases/profile/UpdateSkillUseCase';
+import { PrismaProfileRepository } from '../../infrastructure/repositories/PrismaProfileRepository';
+import { PrismaSkillRepository } from '../../infrastructure/repositories/PrismaSkillRepository';
 
 const profileRepository = new PrismaProfileRepository();
 const skillRepository = new PrismaSkillRepository();

@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { GetProfileUseCase } from '../../../application/use-cases/profile/GetProfileUseCase';
-import { AddProfileLanguagesUseCase } from '../../../application/use-cases/profile/AddProfileLanguagesUseCase';
-import { UpdateLanguageUseCase } from '../../../application/use-cases/profile/UpdateLanguageUseCase';
-import { PrismaProfileRepository } from '../../../infrastructure/repositories/PrismaProfileRepository';
-import { PrismaLanguageRepository } from '../../../infrastructure/repositories/PrismaLanguageRepository';
+import { GetProfileUseCase } from '../../application/use-cases/profile/GetProfileUseCase';
+import { AddProfileLanguagesUseCase } from '../../application/use-cases/profile/AddProfileLanguagesUseCase';
+import { UpdateLanguageUseCase } from '../../application/use-cases/profile/UpdateLanguageUseCase';
+import { PrismaProfileRepository } from '../../infrastructure/repositories/PrismaProfileRepository';
+import { PrismaLanguageRepository } from '../../infrastructure/repositories/PrismaLanguageRepository';
 
 const profileRepository = new PrismaProfileRepository();
 const languageRepository = new PrismaLanguageRepository();

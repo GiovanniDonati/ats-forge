@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { PrismaUserRepository } from '../../../infrastructure/repositories/PrismaUserRepository';
+import { PrismaUserRepository } from '../../infrastructure/repositories/PrismaUserRepository';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-key';
 const userRepository = new PrismaUserRepository();

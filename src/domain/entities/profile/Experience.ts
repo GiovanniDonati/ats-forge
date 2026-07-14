@@ -6,6 +6,7 @@ export interface ExperienceEntity {
   location?: string | null;
   activities: string[];
   results: string[];
+  stacks: string[];
   startDate: Date;
   endDate?: Date | null;
   isCurrent: boolean;

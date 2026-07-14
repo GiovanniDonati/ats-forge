@@ -68,29 +68,29 @@ model Credential {
 }
 
 model Profile {
-  id          String       @id @default(uuid())
-  userId      String       @map("user_id")
-  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+  id     String @id @default(uuid())
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   // Multiplos perfis/currículos por usuário
-  resumeName  String   @default("Meu Currículo") @map("resume_name")
-  
-  name        String       
-  headline    String?      
-  summary     String?      
-  email       String?
-  phone       String?
-  location    String?      
-  
-  linkedin    String?
-  github      String?
-  portfolio   String?
-  
-  languages   ProfileLanguage[] 
+  resumeName String @default("Meu Currículo") @map("resume_name")
+
+  name     String
+  headline String?
+  summary  String?
+  email    String?
+  phone    String?
+  location String?
+
+  linkedin  String?
+  github    String?
+  portfolio String?
+
+  languages   ProfileLanguage[]
   skills      Skill[]           @relation("ProfileToSkill")
   experiences Experience[]
-  educations  Education[]       
-  projects    Project[]         
+  educations  Education[]
+  projects    Project[]
 }
 
 model Skill {
@@ -104,46 +104,47 @@ model ProfileLanguage {
   id        String        @id @default(uuid())
   profileId String        @map("profile_id")
   profile   Profile       @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  name      String        
+  name      String
   level     LanguageLevel @default(BASIC)
 
-  @@unique([profileId, name]) 
+  @@unique([profileId, name])
 }
 
 model Experience {
-  id          String    @id @default(uuid())
-  profileId   String    @map("profile_id")
-  profile     Profile   @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  title       String    
-  company     String
-  location    String?   
-  activities  String[] 
-  results     String[] 
-  startDate   DateTime  @map("start_date")
-  endDate     DateTime? @map("end_date")
-  isCurrent   Boolean   @default(false) @map("is_current") 
+  id         String    @id @default(uuid())
+  profileId  String    @map("profile_id")
+  profile    Profile   @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  title      String
+  company    String
+  location   String?
+  activities String[]
+  results    String[]
+  stacks     String[]
+  startDate  DateTime  @map("start_date")
+  endDate    DateTime? @map("end_date")
+  isCurrent  Boolean   @default(false) @map("is_current")
 }
 
 model Education {
-  id          String        @id @default(uuid())
-  profileId   String        @map("profile_id")
-  profile     Profile       @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  school      String        
-  fieldOfStudy String       
-  degreeType  EducationType @map("degree_type")
-  startDate   DateTime      @map("start_date")
-  endDate     DateTime?     @map("end_date")
-  isCurrent   Boolean       @default(false) @map("is_current")
+  id           String        @id @default(uuid())
+  profileId    String        @map("profile_id")
+  profile      Profile       @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  school       String
+  fieldOfStudy String
+  degreeType   EducationType @map("degree_type")
+  startDate    DateTime      @map("start_date")
+  endDate      DateTime?     @map("end_date")
+  isCurrent    Boolean       @default(false) @map("is_current")
 }
 
 model Project {
   id          String    @id @default(uuid())
   profileId   String    @map("profile_id")
   profile     Profile   @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  name        String    
-  description String?   
-  repository  String?   
-  deploy      String?   
+  name        String
+  description String?
+  repository  String?
+  deploy      String?
   startDate   DateTime? @map("start_date")
   endDate     DateTime? @map("end_date")
   skills      Skill[]   @relation("ProjectToSkill")

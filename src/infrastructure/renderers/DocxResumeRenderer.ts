@@ -7,8 +7,7 @@ import {
     Paragraph,
     TextRun,
 } from 'docx';
-import { EnrichedExperience } from '../../domain/entities/EnrichedExperience';
-import { IResumeRenderer, RenderPayload } from '../../domain/interfaces/IResumeRenderer';
+import { IResumeRenderer, RenderPayload, RenderExperience } from '../../domain/interfaces/IResumeRenderer';
 
 // ── Typography constants (values in half-points) ─────────────────────────────
 const FONT = 'Arial';
@@ -71,7 +70,7 @@ function summaryBlock(profile: string): Paragraph[] {
   return [sectionHeader('Resumo Profissional'), body(profile)];
 }
 
-function experienceBlock(experiencias: EnrichedExperience[]): Paragraph[] {
+function experienceBlock(experiencias: RenderExperience[]): Paragraph[] {
   const children: Paragraph[] = [sectionHeader('Experiência Profissional')];
 
   experiencias.forEach((exp, idx) => {

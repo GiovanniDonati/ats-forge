@@ -1,7 +1,7 @@
 import express from 'express';
-import ProfileRoutes from './presentation/http/routes/ProfileRoutes';
-import UserRoutes from './presentation/http/routes/UserRoutes';
-import AuthRoutes from './presentation/http/routes/AuthRoutes';
+import ProfileRoutes from './presentation/routes/ProfileRoutes';
+import UserRoutes from './presentation/routes/UserRoutes';
+import AuthRoutes from './presentation/routes/AuthRoutes';
 
 const app = express();
 app.use(express.json());
